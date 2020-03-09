@@ -1,7 +1,7 @@
 # This is the file where you must work.
 # Write code in the functions (and create new functions) so that they work
 # according to the requirements.
-
+import operator
 
 
 def display_inventory(inventory = {}):
@@ -14,25 +14,28 @@ def add_to_inventory(inventory = {}, added_items = []):
     """Add to the inventory dictionary a list of items from added_items."""
     for item in added_items:
         if item in inventory.keys():
-            value_of_key = inventory[item] + 1
-            inventory[item] = value_of_key
+            inventory[item] = inventory[item] + 1
         else:
             inventory[item] = 1
     return inventory
 
 
-def remove_from_inventory(inventory, removed_items):
+def remove_from_inventory(inventory = {}, removed_items = []):
     """Remove from the inventory dictionary a list of items from removed_items."""
-    pass
+    for item in removed_items:
+        if item in inventory.keys():
+            inventory[item] = inventory[item] - 1
+            if inventory[item] <= 0:
+                inventory.pop(item)
+    return inventory
 
 
-def print_table(inventory, order):
+def print_table(inventory = {}, order = None):
     """
     Display the contents of the inventory in an ordered, well-organized table with
     each column right-aligned.
     """
-
-    pass
+  
 
 
 def import_inventory(inventory, filename):
@@ -47,10 +50,15 @@ def export_inventory(inventory, filename):
     pass
 
 def main():
-    user_items = {'gold_coins': 45, 'arrow': 12, 'torch': 6, 'dagger': 2, 'rope': 1, 'ruby': 1}
+    user_items = {'gold coins': 45, 'arrow': 12, 'torch': 6, 'dagger': 2, 'rope': 1, 'ruby': 1}
     display_inventory(user_items)
-    updated_user_items = add_to_inventory(user_items, ['gold_coins', 'dupa', 'dupa'])
-    print(updated_user_items)
+    user_items = add_to_inventory(user_items, ['gold coins', 'dupa', 'dupa'])
+    print(user_items)
+    user_items = remove_from_inventory(user_items, ['rope', 'cycki', 'gold coins', 'gold coins'])
+    print(user_items)
+    print_table(user_items)
+    print_table(user_items, 'count,asc')
+    print_table(user_items, 'count,desc')
 
 if __name__ == '__main__':
     main()
