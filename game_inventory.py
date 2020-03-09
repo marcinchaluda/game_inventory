@@ -1,14 +1,16 @@
-
 # This is the file where you must work.
 # Write code in the functions (and create new functions) so that they work
 # according to the requirements.
 
+user_items = {'gold_coins': 45, 'arrow': 12, 'torch': 6, 'dagger': 2, 'rope': 1, 'ruby': 1}
 
-def display_inventory(inventory):
+def display_inventory(inventory = {}):
     """Display the contents of the inventory in a simple way."""
-    pass
+    for item_key, item_value in inventory.items():
+        key_value_pair =  f'{item_key}: {item_value}'  
+        print(key_value_pair)    
 
-
+display_inventory(user_items)
 def add_to_inventory(inventory, added_items):
     """Add to the inventory dictionary a list of items from added_items."""
     pass
