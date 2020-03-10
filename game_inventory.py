@@ -46,7 +46,7 @@ def print_table(inventory = {}, order = None):
 
     for item_key, item_value in inventory.items():
         print(f'{item_key:<1}' + " " + table_borders[1] + f'{item_value:>6}')
-    print(table_borders[0])
+    print(table_borders[0])clear
 
 
 def import_inventory(inventory, filename):
