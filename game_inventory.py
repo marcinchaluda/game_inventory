@@ -37,7 +37,7 @@ def print_table(inventory = {}, order = None):
     """
     table_borders = ['-----------------', '|']
     print(table_borders[0])
-    print('item name ' + table_borders[1] + ' count')
+    print('item name  ' + table_borders[1] + ' count')
     print(table_borders[0])
     if order == 'count,asc':
         inventory = dict(sorted(inventory.items(), key = operator.itemgetter(1)))
