@@ -59,7 +59,6 @@ def import_inventory(inventory, filename = 'import_inventory.csv'):
                 for item in line:
                     if item != '':
                         items_from_file.append(item)
-        print(items_from_file)
         add_to_inventory(inventory, items_from_file)         
     except ImportError:
         print('File %s not found!' % filename)
