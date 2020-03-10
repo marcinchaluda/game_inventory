@@ -2,7 +2,7 @@
 # Write code in the functions (and create new functions) so that they work
 # according to the requirements.
 import operator
-
+import csv
 
 def display_inventory(inventory = {}):
     """Display the contents of the inventory in a simple way."""
@@ -37,7 +37,7 @@ def print_table(inventory = {}, order = None):
     """
     table_borders = ['-----------------', '|']
     print(table_borders[0])
-    print('item name  ' + table_borders[1] + ' count')
+    print('item name ' + table_borders[1] + ' count')
     print(table_borders[0])
     if order == 'count,asc':
         inventory = dict(sorted(inventory.items(), key = operator.itemgetter(1)))
@@ -45,14 +45,24 @@ def print_table(inventory = {}, order = None):
         inventory = dict(sorted(inventory.items(), key = operator.itemgetter(1), reverse = True))
 
     for item_key, item_value in inventory.items():
-        print(f'{item_key:<1}' + " " + table_borders[1] + f'{item_value:>6}')
-    print(table_borders[0])clear
+        print(f'{item_key.rjust(9)}' + ' ' + table_borders[1] + f'{item_value:>6}')
+    print(table_borders[0])
 
 
-def import_inventory(inventory, filename):
+def import_inventory(inventory, filename = 'import_inventory.csv'):
     """Import new inventory items from a CSV file."""
-
-    pass
+    items_from_file = []
+    try:
+        with open(filename, 'r') as item_list:
+            csv_reader = csv.reader(item_list)
+            for index, line in enumerate(csv_reader):
+                for item in line:
+                    if item != '':
+                        items_from_file.append(item)
+        print(items_from_file)
+        add_to_inventory(inventory, items_from_file)         
+    except ImportError:
+        print('File %s not found!' % filename)
 
 
 def export_inventory(inventory, filename):
@@ -61,15 +71,16 @@ def export_inventory(inventory, filename):
     pass
 
 def main():
-    user_items = {'gold coins': 45, 'arrow': 12, 'torch': 6, 'dagger': 2, 'rope': 1, 'ruby': 1}
+    user_items = {'arrow': 12, 'torch': 6, 'dagger': 2, 'rope': 1, 'ruby': 1}
     display_inventory(user_items)
     user_items = add_to_inventory(user_items, ['gold coins', 'dupa', 'dupa'])
     print(user_items)
     user_items = remove_from_inventory(user_items, ['rope', 'cycki', 'gold coins', 'gold coins'])
     print(user_items)
-    print_table(user_items)
-    print_table(user_items, 'count,asc')
-    print_table(user_items, 'count,desc')
-
+    # print_table(user_items)
+    # print_table(user_items, 'count,asc')
+    # print_table(user_items, 'count,desc')
+    import_inventory(user_items, 'import_inventory.csv')
+    print(user_items)
 if __name__ == '__main__':
     main()
