@@ -60,8 +60,8 @@ def import_inventory(inventory, filename = 'import_inventory.csv'):
                     if item != '':
                         items_from_file.append(item)
         add_to_inventory(inventory, items_from_file)         
-    except ImportError:
-        print('File %s not found!' % filename)
+    except FileNotFoundError as file_not_found:
+        print("File '%s' not found!" % file_not_found.filename)
 
 
 def export_inventory(inventory, filename = 'export_inventory.csv'):
