@@ -48,7 +48,6 @@ def print_table(inventory = {}, order = None):
         print(f'{item_key.rjust(9)}' + ' ' + table_borders[1] + f'{item_value:>6}')
     print(table_borders[0])
 
-
 def import_inventory(inventory, filename = 'import_inventory.csv'):
     """Import new inventory items from a CSV file."""
     items_from_file = []
@@ -82,9 +81,9 @@ def export_inventory(inventory, filename = 'export_inventory.csv'):
 def main():
     user_items = {'arrow': 1, 'torch': 1, 'dagger': 1, 'rope': 1, 'ruby': 1}
     display_inventory(user_items)
-    user_items = add_to_inventory(user_items, ['gold coins', 'dupa', 'dupa'])
+    user_items = add_to_inventory(user_items, ['gold coins',])
     print(user_items)
-    user_items = remove_from_inventory(user_items, ['rope', 'cycki', 'gold coins', 'gold coins'])
+    user_items = remove_from_inventory(user_items, ['rope', 'gold coins', 'gold coins'])
     print(user_items)
     # print_table(user_items)
     # print_table(user_items, 'count,asc')
